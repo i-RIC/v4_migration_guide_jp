@@ -45,7 +45,7 @@ ifort *.obj lib\iriclib.lib -o solver.exe
 * iriclib のインターフェースの変更内容については [iriclib の変更内容](iriclib_changes.md) を参照。
 * 変更後の iriclib の関数を正しく呼び出せているかの確認方法は、[iriclib 関数のインターフェースの確認](iriclib_iface.md)を参照。
 
-例として、 Nays2DH を iRIC v4 用にソースを修正した内容をは以下に示す。表示されたページで "Nays2DH.f90" の中の「Load diff」をクリックする。
+例として、 Nays2DH を iRIC v4 用にソースを修正した内容を以下に示す。表示されたページで "Nays2DH.f90" の中の「Load diff」をクリックする。
 
 https://github.com/i-RIC/v3_nays2dh/commit/5e9e07e61e7f17a70f5ba542f88daf67707377d3#diff-f6757e8f77a14a911c7d7d652c3ed0c6318c65e668eeb9bc492e05f694e024a4
 
