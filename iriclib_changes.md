@@ -137,6 +137,11 @@ call cg_iric_write_sol_start(fid)
 call cg_iric_write_sol_end(fid)
 ```
 
+変更の趣旨は以下の通り。
+
+* 以前は cg_iric_sol_write_time() で、計算結果の出力開始のための処理を同時に行っていたが、関数名と処理内容に違いがある状態になっていた。計算結果の出力開始のための処理を cg_iric_write_start() に移動し、 cg_iric_sol_write_time() では時間の出力のみ行うようにした。
+* 以前は cg_iric_flush() で、計算結果の出力終了のための処理を行っていたが、関数名と処理内容に違いがある状態になっているため、名前を cg_iric_write_end() に変更した。
+
 ## 非構造格子の読み込み処理の変更
 
 iRIC v3 用 iriclib では非構造格子の読み込み用機能を提供しておらず、非構造格子を読み込む際は cgnslib の関数を使用する必要があった。
@@ -199,19 +204,6 @@ call cg_iric_read_grid_triangleelements(fid, nodeids, ier) ! nodeids に三角�
 * cg_iRIC_Write_Sol_Start
 * cg_iRIC_Write_Sol_End
 * iRIC_Check_Lock
-
-## 今後予定する変更
-
-今後以下の変更を予定している。
-
-* cg_iric_write_sol_start() の必須化 (計算結果の出力の前に呼び出す)
-* cg_iric_write_sol_end() の必須化 (計算結果の出力の後に、cg_iric_flush() の代わりに呼び出す)
-* cg_iric_flush() の削除
-
-変更の趣旨は以下の通り。
-
-* 現在は cg_iric_sol_write_time() で、計算結果の出力開始のための処理を同時に行っているが、関数名と処理内容に違いがある状態になっている。計算結果の出力開始のための処理を cg_iric_write_start() に移動し、 cg_iric_sol_write_time() では時間の出力のみ行うようにする。
-* 現在は cg_iric_flush() で、計算結果の出力終了のための処理を行っているが、関数名と処理内容に違いがある状態になっているため、名前を cg_iric_write_end() に変更する。
 
 # 新機能の追加
 
