@@ -113,18 +113,28 @@ call cg_iric_open(filename, IRIC_MODE_MODIFY, fid, ier)
 call cg_iric_close(fid, ier)
 ```
 
-## cg_iric_flush の引数の変更
+## cg_iric_flush の削除と cg_iric_write_sol_start, cg_iric_write_sol_end の必須化
 
-cg_iric_flush の最初の引数 cgnsName を除去した。
+以前は、計算結果の出漁処理の最後に、 cg_iric_flush を呼び出していたが、この関数を削除した。
+また cg_iric_write_sol_start, cg_iric_write_sol_end は、以前はあってもなくても動いたが、
+呼び出しを必須とした。
+
+変更前、変更後のソースの例を以下に示す。
 
 **変更前**
 ```
+(計算結果出力処理)
+
 call cg_iric_flush_f(cgnsName, fid, ier)
 ```
 
 **変更後**
 ```
-call cg_iric_flush(fid, ier)
+call cg_iric_write_sol_start(fid)
+
+(計算結果出力処理)
+
+call cg_iric_write_sol_end(fid)
 ```
 
 ## 非構造格子の読み込み処理の変更
