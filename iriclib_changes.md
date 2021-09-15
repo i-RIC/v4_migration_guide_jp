@@ -115,7 +115,7 @@ call cg_iric_close(fid, ier)
 
 ## cg_iric_flush の削除と cg_iric_write_sol_start, cg_iric_write_sol_end の必須化
 
-以前は、計算結果の出漁処理の最後に、 cg_iric_flush を呼び出していたが、この関数を削除した。
+以前は、計算結果の出力処理の最後に、 cg_iric_flush を呼び出していたが、この関数を削除した。
 また cg_iric_write_sol_start, cg_iric_write_sol_end は、以前はあってもなくても動いたが、
 呼び出しを必須とした。
 
