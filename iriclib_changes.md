@@ -240,8 +240,7 @@ call cg_iric_read_grid_triangleelements(fid, nodeids, ier) ! nodeids に三角�
 * cg_iRIC_GotoBase
 * cg_iRIC_GotoCC
 * cg_iRIC_GoToRawDataTop
-* cg_iRIC_Write_Sol_Start
-* cg_iRIC_Write_Sol_End
+* cg_iRIC_Flush
 * iRIC_Check_Lock
 
 # 新機能の追加
