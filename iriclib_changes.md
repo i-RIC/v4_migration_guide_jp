@@ -142,6 +142,45 @@ call cg_iric_write_sol_end(fid)
 * 以前は cg_iric_sol_write_time() で、計算結果の出力開始のための処理を同時に行っていたが、関数名と処理内容に違いがある状態になっていた。計算結果の出力開始のための処理を cg_iric_write_start() に移動し、 cg_iric_sol_write_time() では時間の出力のみ行うようにした。
 * 以前は cg_iric_flush() で、計算結果の出力終了のための処理を行っていたが、関数名と処理内容に違いがある状態になっているため、名前を cg_iric_write_end() に変更した。
 
+## ソルバとの連携機能の強化
+
+以前は iric_check_cancel() で、ユーザが停止ボタンを押した時、ソルバを停止できるようにしていた。
+これに加え、 cg_iric_check_update() を追加し、ユーザが再読み込みボタンを押した時、速やかに最新の計算結果が再読込できるようにした。
+
+例を以下に示す。
+
+```
+imin = 0
+imax = 10000
+iout = 100
+
+do i = imin, imax
+
+  ! iRIC GUIで停止ボタンが押されたかチェック
+  call iric_check_cancel(canceled)
+  if (canceled == 1) then
+      exit
+  end if
+
+  ! iRIC GUIで再読み込みボタンが押されたかチェック
+  call cg_iric_check_update(fid, ier)
+
+  ! ここに、計算処理の実行処理を追加
+
+  if(mod(i, iout) == 0) then
+      write(*,*) "i = ", i
+
+      ! output
+      call cg_iric_write_sol_start(fid, ier)
+
+      ! この間に計算結果の出力処理を追加
+
+      call cg_iric_write_sol_end(fid, ier)
+  end if
+
+end do
+```
+
 ## 非構造格子の読み込み処理の変更
 
 iRIC v3 用 iriclib では非構造格子の読み込み用機能を提供しておらず、非構造格子を読み込む際は cgnslib の関数を使用する必要があった。
