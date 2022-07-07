@@ -130,11 +130,11 @@ call cg_iric_flush_f(cgnsName, fid, ier)
 
 **変更後**
 ```
-call cg_iric_write_sol_start(fid)
+call cg_iric_write_sol_start(fid, ier)
 
 (計算結果出力処理)
 
-call cg_iric_write_sol_end(fid)
+call cg_iric_write_sol_end(fid, ier)
 ```
 
 変更の趣旨は以下の通り。
