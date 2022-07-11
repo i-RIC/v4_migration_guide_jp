@@ -139,7 +139,7 @@ call cg_iric_write_sol_end(fid, ier)
 
 変更の趣旨は以下の通り。
 
-* 以前は cg_iric_sol_write_time() で、計算結果の出力開始のための処理を同時に行っていたが、関数名と処理内容に違いがある状態になっていた。計算結果の出力開始のための処理を cg_iric_write_start() に移動し、 cg_iric_sol_write_time() では時間の出力のみ行うようにした。
+* 以前は cg_iric_write_sol_time() で、計算結果の出力開始のための処理を同時に行っていたが、関数名と処理内容に違いがある状態になっていた。計算結果の出力開始のための処理を cg_iric_write_start() に移動し、 cg_iric_write_sol_time() では時間の出力のみ行うようにした。
 * 以前は cg_iric_flush() で、計算結果の出力終了のための処理を行っていたが、関数名と処理内容に違いがある状態になっているため、名前を cg_iric_write_end() に変更した。
 
 ## ソルバとの連携機能の強化
